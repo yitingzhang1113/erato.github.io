@@ -4,17 +4,90 @@ title: About
 permalink: /about/
 ---
 
-## 关于我
-你好，我是程序员柠檬。
+<style>
+  .about-container {
+    max-width: 720px;
+    margin: 50px auto;
+    padding: 35px 30px;
+    background: linear-gradient(135deg, #a8dadc 0%, #f1faee 100%);
+    border-radius: 25px;
+    box-shadow: 0 10px 40px rgba(72, 201, 176, 0.25);
+    font-family: "Comic Sans MS", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #264653;
+    line-height: 1.75;
+    position: relative;
+    overflow: hidden;
+  }
+  .about-container::before {
+    content: "✨";
+    font-size: 3rem;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    animation: sparkle 2.5s infinite alternate ease-in-out;
+  }
+  @keyframes sparkle {
+    0% { opacity: 0.3; transform: rotate(0deg) scale(1); }
+    100% { opacity: 1; transform: rotate(15deg) scale(1.2); }
+  }
+  .about-container h2 {
+    color: #1d3557;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 25px;
+    letter-spacing: 1.2px;
+    text-shadow: 1px 1px 2px #a8dadc;
+  }
+  .about-container p {
+    font-size: 1.15rem;
+    margin-bottom: 20px;
+    text-indent: 2em;
+  }
+  .about-container strong {
+    color: #2a9d8f;
+  }
+  .about-container em {
+    color: #e76f51;
+    font-style: normal;
+  }
+  .about-container a {
+    color: #e63946;
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 2px dashed #e63946;
+    transition: all 0.3s ease;
+  }
+  .about-container a:hover {
+    color: #f1faee;
+    background-color: #e63946;
+    border-bottom: 2px solid #f1faee;
+    padding-bottom: 2px;
+    border-radius: 4px;
+    text-decoration: none;
+  }
+  .about-footer {
+    margin-top: 45px;
+    font-size: 0.95rem;
+    color: #718096;
+    text-align: center;
+    font-style: italic;
+  }
+</style>
 
-国内一线互联网大厂计算机软件工程师、[知乎](https://www.zhihu.com/people/ning-meng-cheng-31-94)编程领域万赞答主。
+<div class="about-container">
+  <h2>关于我 💫</h2>
 
-[个人技术公众号](https://mp.weixin.qq.com/mp/homepage?__biz=MzkwOTE2OTY1Nw==&hid=1&sn=6395e40d884ce4dd3900a68a0f5a6b87&scene=18#wechat_redirect)分享编程学习路线、编程学习资源，记录技术成长，欢迎扫码添加：
+  <p>你好呀！我是 <strong>Erato</strong>，一名活力满满的 <em>Georgia Tech</em> 计算机科学硕士（MSCS）学生，爱探索科技世界的奇妙奥秘。</p>
 
-![公众号二维码](https://github.com/lemonchann/images/raw/master/gzh/%E6%96%87%E6%9C%AB%E6%8E%A8%E5%B9%BF%E6%96%87%E6%A1%88.png)
+  <p>我现在在学习数据结构前端开发，还有时下最火的检索增强生成模型（RAG）。喜欢用项目驱动学习，不断提升技能，也乐于和大家分享我的成长与收获。</p>
 
+  <p>欢迎来到我的
+    <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">GitHub</a>，
+    或者我的
+    <a href="https://yourusername.github.io" target="_blank" rel="noopener noreferrer">个人博客</a>，
+    一起玩转代码与创意，探索无穷可能！</p>
 
-
-## 版权声明
-
-博客文章是我原创文章，存档于_posts 文件夹下，版权归我所有，转载请与我联系获得授权许可。
+  <div class="about-footer">
+    <p>这里的内容均为原创，版权属于我本人，未经允许请勿转载。如需授权，欢迎随时联系我～</p>
+  </div>
+</div>

@@ -1,21 +1,19 @@
-#
 # This file contains configuration flags to customize your site
 #
 
 # Name of your site (displayed in the header)
-name: "lemon's blog"
+name: "Erato's blog"
 # Short bio or description (displayed in the header)
-description: "个人技术公众号：程序员柠檬  分享编程资源 | 学习路线"
+description: "Erato's cs learning blog"
 
 #
 # Flags below are optional
 #
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
-avatar: https://github.com/lemonchann/images/raw/master/gzh/%E6%96%87%E6%9C%AB%E6%8E%A8%E5%B9%BF%E6%96%87%E6%A1%88.png
+avatar: https://postimg.cc/N5nd9V2L
 # 你的favicon（出现在浏览器tab上）图片URL，建议使用较小(64px × 64px)的图片
-favicon: https://github.com/lemonchann/lemonchann.github.io/raw/master/images/favicon.ico
-
+favicon: https://postimg.cc/3x1f5b7H
 # Tabs in header. There are 'Blog', 'About', 'Archive', 'Tags'
 # and URL Link(e.g. 'Theme' tab below) tabs. If you don't need one, just delete
 # it from the list(Delete '- name: ' and 'url: ', too!)
@@ -36,26 +34,14 @@ excerpt_separator: <!-- more -->
 
 # Includes an icon in the footer for each username you enter
 footer-links:
-  #weibo: frommidworld #请输入你的微博个性域名 https://www.weibo.com/<thispart>
-  behance: # https://www.behance.net/<username>
-  dribbble:
-  zhihu: ning-meng-cheng-31-94
-  email: llong87@163.com
-  facebook:
-  flickr:
-  github: lemonchann 
-  googleplus: # anything in your profile username that comes after plus.google.com/
-  instagram:
-  linkedin:
-  pinterest:
-  rss: # just type anything here for a working RSS icon
-  stackoverflow: # your stackoverflow profile, e.g. "users/50476/bart-kiers"
-  tumblr: # https://<username>.tumblr.com
-  #twitter: frommidworld
-  youtube:
+  email: yitingzhang76@gmail.com
+  linkedin: yiting-zhang-b233a825b
+  instagram: erato1113
+  github: yitingzhang1113
+
 
 # Text under the icons in footer
-footer-text: Copyright (c) 2019 lemon
+footer-text: Copyright (c) 2025 Erato 
 
 # Enter your Disqus shortname (not your username) to enable commenting on posts
 # You can find your shortname on the Settings page of your Disqus account
@@ -63,17 +49,17 @@ disqus: # fromendworld
 
 # Gitalk
 gitalk:
-  clientID: bd65d5c0df878155b7fa
-  clientSecret: d0220762c05c2d6b6f6152a0f0e4b6b090de9729
-  repo: lemonchann.github.io
-  owner: lemonchann
+  clientID: Ov23liv1uHFVdOIhdnuS
+  clientSecret: 81fbd38dd40729755d08153079d66076998677d8
+  repo: erato.github.io
+  owner: yitingzhang1113
 
 # Enter your Google Analytics web tracking code (e.g. UA-2110908-2) to activate tracking
 #google_analytics: 
 
 # Your website URL (e.g. http://barryclark.github.io or http://www.barryclark.co)
 # Used for Sitemap.xml and your RSS feed
-url: https://lemonchann.github.io
+url: https://erato.github.io
 
 # If you're hosting your site at a Project repository on GitHub pages
 # (http://yourusername.github.io/repository-name)
@@ -118,4 +104,3 @@ exclude:
   - LICENSE
   - README.md
   - CNAME
-

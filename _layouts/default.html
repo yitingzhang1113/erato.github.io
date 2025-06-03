@@ -1,34 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
   {% include head.html %}
+
   <body>
+    <!-- 顶部导航 -->
     {% include nav.html %}
 
-    {% if page.toc==true %}
+    <!-- 侧边栏目录 (TOC)，如果启用 -->
+    {% if page.toc == true %}
       <aside class="toc">
         {% include toc.html html=content %}
       </aside>
     {% endif %}
 
+    <!-- 主内容区域 -->
     <div id="main" role="main" class="wrapper-content">
       <div class="container">
         {{ content }}
       </div>
     </div>
 
+    <!-- 页面底部分析统计 -->
     {% include analytics.html %}
+
+    <!-- 页脚（移动端样式） -->
+    <div class="wrapper-footer-mobile">
+      <footer class="footer">
+        {% include footer.html %}
+      </footer>
+    </div>
+
+    <!-- 页面启用 TOC 时，给主体内容添加对应样式 -->
+    {% if page.toc == true %}
+    <script>
+      document.getElementById("main").classList.add("withtoc");
+    </script>
+    {% endif %}
   </body>
-
-  {% if page.toc==true %}
-  <script>
-    document.getElementById("main").classList.add("withtoc");
-  </script>
-  {% endif %}
-
-  <div class="wrapper-footer-mobile">
-    <footer class="footer">
-      {% include footer.html %}
-    </footer>
-
-
 </html>

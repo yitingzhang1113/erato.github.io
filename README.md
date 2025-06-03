@@ -1,16 +1,97 @@
-这是一个可 fork 的博客模板仓库，帮助你快速搭建自己的博客，可以参考我博客的[这篇文章]( https://lemonchann.github.io/create_blog_with_github_pages/ )详细指导搭建步骤。
+# Erato 的个人博客
 
-### 文章版权
+这是我的个人技术博客，基于 Jekyll 和 GitHub Pages 搭建，主要分享计算机科学学习笔记、前端开发经验和人工智能探索。
 
-`_posts` 文件夹内所有文章版权归我所有，转载需联系我获得授权。
+---
 
-### 致谢
+## 技术栈
 
-感谢Jekyll主题[LOFFER](https://fromendworld.github.io/LOFFER/)模提供了原始主题模板，我在其上进行的二次开发。
+- Jekyll：静态网站生成器  
+- GitHub Pages：免费托管服务  
+- Sass (SCSS)：样式预处理  
+- Markdown：博客内容书写格式  
 
-如果搭建过程中有什么问题，也可以扫码添加我的个人技术公众号讨论交流。
+---
 
-**这是一个专注编程知识和资源分享的公众号，包含各类编程学习路线，让你在编程路上少走弯路**
+## 本地运行
 
-![公众号二维码](https://github.com/lemonchann/images/raw/master/gzh/%E6%96%87%E6%9C%AB%E6%8E%A8%E5%B9%BF%E6%96%87%E6%A1%88.png)
+1. 安装 Bundler（如果未安装）：
 
+gem install bundler
+
+markdown
+Copy
+
+2. 安装依赖：
+
+bundle install
+
+markdown
+Copy
+
+3. 启动本地服务器：
+
+bundle exec jekyll serve
+
+markdown
+Copy
+
+4. 打开浏览器访问：
+
+http://localhost:4000
+
+yaml
+Copy
+
+---
+
+## 构建与部署
+
+- 构建静态文件：
+
+bundle exec jekyll build
+
+yaml
+Copy
+
+- 构建文件输出至 `_site` 目录。  
+- 推送代码到 GitHub，GitHub Pages 会自动部署。
+
+---
+
+## Sass 注意事项
+
+- `@import` 已废弃，建议改用 `@use` 和 `@forward`。  
+- 详情见：https://sass-lang.com/documentation/at-rules/use
+
+---
+
+## 注意事项
+
+- 确保 `_posts` 目录内文件名唯一，避免页面冲突。  
+- 维护良好的代码结构，方便后续维护。
+
+---
+
+## 目录结构
+
+├── _posts/ # 博客文章
+├── _layouts/ # 布局模板
+├── assets/ # 静态资源
+├── _config.yml # 配置文件
+├── style.scss # 样式入口
+└── README.md # 本文件
+
+yaml
+Copy
+
+---
+
+## 联系我
+
+- GitHub：https://github.com/yourusername  
+- 博客：https://yourusername.github.io
+
+---
+
+**Erato**

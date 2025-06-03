@@ -1,9 +1,96 @@
+<style>
+  .wrapper-sidebar {
+    background: linear-gradient(135deg, #e3f2fd 0%, #f0f8ff 100%);
+    padding: 25px 20px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(33, 150, 243, 0.15);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    box-sizing: border-box;
+    text-align: center;  /* 文字居中 */
+  }
+
+  .sidebar {
+    padding: 0;
+    margin: 0;
+  }
+
+  .site-info {
+    margin-bottom: 30px;
+  }
+
+  .site-name {
+    margin: 0 0 10px 0;
+    font-size: 2.0rem;
+    font-weight: 700;
+    color: #1976d2;
+  }
+
+  .site-name a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .site-name a:hover {
+    color: #0d47a1;
+  }
+
+  .site-description {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: #546e7a;
+    margin: 0;
+  }
+
+  .navlist nav {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;  /* 水平居中导航链接 */
+  }
+
+  .navlist nav a {
+    color: #1976d2;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 8px 12px;
+    border-radius: 12px;
+    text-decoration: none;
+    box-shadow: inset 0 0 0 0 transparent;
+    transition: all 0.3s ease;
+    width: fit-content; /* 链接宽度随内容自适应 */
+  }
+
+  .navlist nav a:hover {
+    background: linear-gradient(135deg, #42a5f5 0%, #2196f3 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(33, 150, 243, 0.4);
+    transform: translateY(-2px);
+  }
+
+  .wrapper-footer-desktop {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid #bbdefb;
+    text-align: center; /* 页脚文字居中 */
+  }
+
+  .footer {
+    color: #546e7a;
+    font-size: 0.9rem;
+  }
+</style>
+
 <div class="wrapper-sidebar">
   <header class="sidebar clearfix">
     <div class="site-info">
+      {%- comment -%}
       {% if site.avatar %}
         <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.avatar }}" /></a>
-      {% endif %} 
+      {% endif %}
+      {%- endcomment -%}
       <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
       <p class="site-description">{{ site.description }}</p>
     </div>
@@ -13,7 +100,7 @@
     <nav>
       {% for nav in site.navigation %}
       {% if nav.url contains 'http://' or nav.url contains 'https://' %}
-      <a href="{{ nav.url }}">{{ nav.name }}</a>
+      <a href="{{ nav.url }}" target="_blank" rel="noopener noreferrer">{{ nav.name }}</a>
       {% else %}
       <a href="{{ site.baseurl }}{{ nav.url }}">{{ nav.name }}</a>
       {% endif %}
