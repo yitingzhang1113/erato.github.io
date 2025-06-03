@@ -24,35 +24,33 @@ Copy
 
 2. 安装依赖：
 
+```shell
 bundle install
+```
 
-markdown
-Copy
+
+
 
 3. 启动本地服务器：
-
+```shell
 bundle exec jekyll serve
-
-markdown
-Copy
+```
 
 4. 打开浏览器访问：
 
 http://localhost:4000
 
-yaml
-Copy
+
 
 ---
 
 ## 构建与部署
 
 - 构建静态文件：
-
+```shell
 bundle exec jekyll build
+```
 
-yaml
-Copy
 
 - 构建文件输出至 `_site` 目录。  
 - 推送代码到 GitHub，GitHub Pages 会自动部署。
