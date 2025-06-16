@@ -1,11 +1,106 @@
 ---
 layout: post
-title: "数据结构之 Linked Lists（链表）详解"
+title: "数据结构之 Linked Lists详解"
 date: 2025-06-03
-tags: [数据结构, Linked Lists]
+tags: [Linked Lists]
 comments: true
 author: Erato
+permalink: /create-blog-with-github-pages/2025-06-03/
 ---
+# LeetCode 例题
+
+代码随想录讲义：[链表基础](https://programmercarl.com/%E9%93%BE%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html#%E9%93%BE%E8%A1%A8%E7%9A%84%E7%B1%BB%E5%9E%8B)
+
+## 232. 用栈实现队列
+
+题目链接：[203.移除链表元素](https://leetcode.cn/problems/remove-linked-list-elements/description/)
+## 方法一：递归法
+
+### 思路
+链表的结构本身具有递归性质，可以递归地处理链表。
+
+- 对当前节点 `head`，先递归处理其后续节点：`head.next = removeElements(head.next, val)`
+- 然后判断当前节点的值：
+  - 如果 `head.val == val`，则删除当前节点，返回 `head.next`
+  - 否则，保留当前节点，返回 `head`
+
+### 代码示例（Java）
+```java
+class Solution {
+    public ListNode removeElements(ListNode head, int val) {
+        if (head == null) {
+            return head;  // 递归终止条件
+        }
+        head.next = removeElements(head.next, val);  // 递归处理后续节点
+        return head.val == val ? head.next : head;   // 判断当前节点是否删除
+    }
+}
+```
+在 Java 中，三元条件运算符的基本结构是：
+
+```java
+condition ? expr1 : expr2;
+```
+如果 condition 为真，表达式的值为 expr1,如果 condition 为假，表达式的值为 expr2
+复杂度分析
+时间复杂度：O(n)，遍历所有节点一次
+
+空间复杂度：O(n)，递归调用栈最大深度为链表长度
+
+## 方法二：迭代
+
+### 思路
+用迭代方式遍历链表，逐个检查节点值是否等于 val，并删除。
+
+创建哑节点 dummyHead，指向 head，方便处理头节点被删除的情况
+
+使用指针 temp 遍历链表
+
+当 temp.next 节点的值等于 val，删除该节点：temp.next = temp.next.next
+
+否则，temp 向前移动：temp = temp.next
+
+遍历结束，返回 dummyHead.next
+
+```java
+class Solution {
+    public ListNode removeElements(ListNode head, int val) {
+        ListNode dummyHead = new ListNode(0);
+        dummyHead.next = head;
+        ListNode temp = dummyHead;
+        while (temp.next != null) {
+            if (temp.next.val == val) {
+                temp.next = temp.next.next;  // 删除节点
+            } else {
+                temp = temp.next;  // 移动指针
+            }
+        }
+        return dummyHead.next;
+    }
+}
+```
+复杂度分析
+时间复杂度：O(n)，遍历链表一次
+
+空间复杂度：O(1)，只使用了常数级额外空间
+### 常见时间复杂度级别（从快到慢）
+
+| 复杂度        | 含义                                 | 例子                   |
+|---------------|------------------------------------|------------------------|
+| O(1)          | 常数时间，运行时间固定不变           | 访问数组元素           |
+| O(log n)      | 对数时间，随着输入规模增长缓慢增加   | 二分查找               |
+| O(n)          | 线性时间，运行时间和输入规模成正比   | 单层循环遍历数组       |
+| O(n log n)    | 线性对数时间                       | 归并排序、快速排序     |
+| O(n²)         | 平方时间，嵌套双层循环               | 冒泡排序、选择排序     |
+| O(2^n)        | 指数时间，算法非常慢                 | 递归解决斐波那契数列（朴素法） |
+| O(n!)         | 阶乘时间，极慢                     | 旅行商问题暴力解法     |
+
+---
+
+## 什么是空间复杂度？
+
+空间复杂度表示算法运行过程中占用内存空间与输入规模之间的关系，也用大 O 记号表示。  
+包括输入数据本身占用空间和算法运行时额外申请的空间。
 
 # Linked Lists（链表）
 
@@ -444,97 +539,3 @@ Copy
 head ↔ ... ↔ tail
  ↑                 ↓
  └─────────────────┘
-# LeetCode 例题
-
-代码随想录讲义：[链表基础](https://programmercarl.com/%E9%93%BE%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html#%E9%93%BE%E8%A1%A8%E7%9A%84%E7%B1%BB%E5%9E%8B)
-
-## 232. 用栈实现队列
-
-题目链接：[203.移除链表元素](https://leetcode.cn/problems/remove-linked-list-elements/description/)
-## 方法一：递归法
-
-### 思路
-链表的结构本身具有递归性质，可以递归地处理链表。
-
-- 对当前节点 `head`，先递归处理其后续节点：`head.next = removeElements(head.next, val)`
-- 然后判断当前节点的值：
-  - 如果 `head.val == val`，则删除当前节点，返回 `head.next`
-  - 否则，保留当前节点，返回 `head`
-
-### 代码示例（Java）
-```java
-class Solution {
-    public ListNode removeElements(ListNode head, int val) {
-        if (head == null) {
-            return head;  // 递归终止条件
-        }
-        head.next = removeElements(head.next, val);  // 递归处理后续节点
-        return head.val == val ? head.next : head;   // 判断当前节点是否删除
-    }
-}
-```
-在 Java 中，三元条件运算符的基本结构是：
-
-```java
-condition ? expr1 : expr2;
-```
-如果 condition 为真，表达式的值为 expr1,如果 condition 为假，表达式的值为 expr2
-复杂度分析
-时间复杂度：O(n)，遍历所有节点一次
-
-空间复杂度：O(n)，递归调用栈最大深度为链表长度
-
-## 方法二：迭代
-
-### 思路
-用迭代方式遍历链表，逐个检查节点值是否等于 val，并删除。
-
-创建哑节点 dummyHead，指向 head，方便处理头节点被删除的情况
-
-使用指针 temp 遍历链表
-
-当 temp.next 节点的值等于 val，删除该节点：temp.next = temp.next.next
-
-否则，temp 向前移动：temp = temp.next
-
-遍历结束，返回 dummyHead.next
-
-```java
-class Solution {
-    public ListNode removeElements(ListNode head, int val) {
-        ListNode dummyHead = new ListNode(0);
-        dummyHead.next = head;
-        ListNode temp = dummyHead;
-        while (temp.next != null) {
-            if (temp.next.val == val) {
-                temp.next = temp.next.next;  // 删除节点
-            } else {
-                temp = temp.next;  // 移动指针
-            }
-        }
-        return dummyHead.next;
-    }
-}
-```
-复杂度分析
-时间复杂度：O(n)，遍历链表一次
-
-空间复杂度：O(1)，只使用了常数级额外空间
-### 常见时间复杂度级别（从快到慢）
-
-| 复杂度        | 含义                                 | 例子                   |
-|---------------|------------------------------------|------------------------|
-| O(1)          | 常数时间，运行时间固定不变           | 访问数组元素           |
-| O(log n)      | 对数时间，随着输入规模增长缓慢增加   | 二分查找               |
-| O(n)          | 线性时间，运行时间和输入规模成正比   | 单层循环遍历数组       |
-| O(n log n)    | 线性对数时间                       | 归并排序、快速排序     |
-| O(n²)         | 平方时间，嵌套双层循环               | 冒泡排序、选择排序     |
-| O(2^n)        | 指数时间，算法非常慢                 | 递归解决斐波那契数列（朴素法） |
-| O(n!)         | 阶乘时间，极慢                     | 旅行商问题暴力解法     |
-
----
-
-## 什么是空间复杂度？
-
-空间复杂度表示算法运行过程中占用内存空间与输入规模之间的关系，也用大 O 记号表示。  
-包括输入数据本身占用空间和算法运行时额外申请的空间。

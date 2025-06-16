@@ -2,10 +2,13 @@
 layout: post
 title: "数据结构之 Stack（堆栈）与队列（Queue）详解"
 date: 2025-06-02
-tags: [数据结构]
+tags: [Stack（堆栈）与队列（Queue）]
 comments: true
 author: Erato
+permalink: /create-blog-with-github-pages/2025-06-02/
 ---
+队列是先进先出，栈是先进后出。
+![stack and queue](/images/stack.png)
 # Stack（堆栈）
 # 一、什么是 Stack（堆栈）
 
@@ -15,15 +18,52 @@ Stack（堆栈）是一种特殊的数据结构，遵循“后进先出”（LIF
 - 栈只允许在顶端（Top）进行元素的插入（push）和删除（pop）操作。  
 - 你无法直接访问、插入或删除栈中间或底部的元素，只有栈顶元素可被操作。
 
-它本质上是一种抽象数据类型（ADT），并没有唯一的具体实现方式。
+它本质上是一种抽象数据类型（ADT），并没有唯一的具体实现方式。栈提供push 和 pop 等等接口，所有元素必须符合先进后出规则，所以栈不提供走访功能，也不提供迭代器(iterator)。 不像是set 或者map 提供迭代器iterator来遍历所有元素。栈是以底层容器完成其所有的工作，对外提供统一的接口，底层容器是可插拔的（也就是说我们可以控制使用哪种容器来实现栈的功能）。
+![stack](/images/stack2.png)
+### Java 中的“栈”与底层容器适配（简述版）
 
+- **思想**  
+  - *栈* 只是暴露 `push / pop / peek` 接口，真正存数据的活交给 **可插拔容器**。  
+  - 这与 C++ STL 的 *container adapter* 概念一致。
+
+- **推荐接口**：`Deque<E>`  
+  - `ArrayDeque` → 动态环形数组  
+  - `LinkedList` → 双向链表  
+  - `ConcurrentLinkedDeque` → 无锁链表（并发场景）
+
+- **把 Deque 当栈用**  
+**Deque**（读作 *“deck”*，全称 *Double-Ended Queue*）是一种**双端队列**数据结构——  
+- **双端**：既可以在队头也可以在队尾插入或删除元素。  
+- **队列**：保持元素的顺序，但不像普通队列只开放一端，而是两端都可操作。
+
+  - `push(x)` ⇔ `deque.addFirst(x)`  
+  - `pop()` ⇔ `deque.removeFirst()`  
+  - `peek()` ⇔ `deque.peekFirst()`
+
+- **示例：换底座只改一行**
+  ```java
+  Deque<Integer> stack = new ArrayDeque<>();     // 数组实现
+  // Deque<Integer> stack = new LinkedList<>();  // 换成链表实现
+  stack.push(42);
+  int top = stack.pop();
+队列同理
+Queue<E> / Deque<E> + 任意实现 → FIFO 或双端队列。
+![stack3](/images/stack3.png)
 ---
 
 # 二、Stack 的基本操作
+### 主要操作
+- `push(object)`：将元素 `object` 压入栈顶  
+- `pop()`：移除并返回栈顶元素  
+
+### 辅助操作
+- `top()` / `peek()`：返回栈顶元素，但不删除  
+- `size()`：返回当前栈元素个数  
+- `isEmpty()`：判断栈是否为空  
 
 | 操作        | 描述                                | 返回值                         |
 |-------------|-------------------------------------|--------------------------------|
-| `push(obj)` | 将元素 `obj` 插入栈顶               | 无                             |
+| `push(object)` | 将元素 `object` 插入栈顶               | 无                             |
 | `pop()`     | 移除并返回栈顶元素                   | 栈顶元素（若栈空，则返回 `null`）|
 | `top()` / `peek()` | 返回栈顶元素，但不删除它         | 栈顶元素（若栈空，则返回 `null`）|
 | `size()`    | 返回栈中当前元素个数                 | 整数                           |
@@ -42,9 +82,9 @@ Stack（堆栈）是一种特殊的数据结构，遵循“后进先出”（LIF
 | `size()`  | 2       | 3, 5                       |
 | `pop()`   | 3       | 5                          |
 | `isEmpty()` | false | 5                          |
-| `pop()`   | 5       | （空）                     |
-| `isEmpty()` | true  | （空）                     |
-| `pop()`   | null    | （空）                     |
+| `pop()`   | 5       | （）                     |
+| `isEmpty()` | true  | （）                     |
+| `pop()`   | null    | （）                     |
 | `push(7)` | -       | 7                          |
 | `push(9)` | -       | 9, 7                       |
 | `top()`   | 9       | 9, 7                       |
@@ -62,7 +102,11 @@ Stack（堆栈）是一种特殊的数据结构，遵循“后进先出”（LIF
 - 使用数组存储元素，按照从左到右顺序放置，栈顶位于数组末尾。  
 - 维护一个变量表示栈顶元素的索引或当前栈大小。  
 - 插入时将元素放到数组 `size` 索引处，`size` 加一；删除时将 `size` 减一并返回对应元素。  
-- 数组容量有限，当满时需要扩容或抛出异常。扩容操作为 O(n) 时间，但摊销到每次 `push` 为 O(1)。  
+- 数组容量有限，当满时需要扩容或抛出异常。扩容操作为 O(n) 时间，但摊销到每次 `push` 为 O(1)。
+The array storing the stack elements may become full. A
+push() operation may then throw an implementation-defined
+exception or resize the backing array. This behavior is not
+defined or forced by the ADT.  
 
 **示例伪代码：**
 
@@ -94,13 +138,29 @@ end procedure
 
 ## 五、性能分析与限制
 
-| 指标       | 数组实现                     | 链表实现                      |
-|------------|-----------------------------|------------------------------|
-| 空间复杂度 | O(n)，容量受限，需预定义大小 | O(n)，动态增长，无需预定义大小 |
-| push 时间  | 平均 O(1)，满时扩容为 O(n)   | O(1)                         |
-| pop 时间   | O(1)                       | O(1)                         |
-| top 时间   | O(1)                       | O(1)                         |
-| 主要限制   | 需预定义最大容量，扩容耗时   | 额外存储指针，空间略有开销    |
+
+### 1. 复杂度概览
+- 设栈中元素数量为 *n*  
+- **空间**：`O(n)`  
+- **时间**：`push(obj)` | `pop()` | `top()` | `size()` | `isEmpty()` → `O(1)`  
+
+### 2. 数组栈 vs. 链表栈
+
+| 指标 / Metric            | 数组实现 Array-Backed Stack              | 链表实现 Linked-List Stack         |
+|--------------------------|------------------------------------------|------------------------------------|
+| **空间复杂度** Space     | `O(n)`；容量固定，超出需扩容             | `O(n)`；动态增长                   |
+| **push 时间** Push Time  | 平均 `O(1)`；<br>触发扩容时 `O(n)`       | 始终 `O(1)`                        |
+| **pop 时间** Pop Time    | `O(1)`                                   | `O(1)`                             |
+| **top 时间** Top/Peek    | `O(1)`                                   | `O(1)`                             |
+| **主要限制** Limitations | 需预设容量；扩容代价高                   | 需额外指针字段，略增空间开销        |
+
+### 3. 关键限制 (Key Limitations)
+1. **数组栈**  
+   - 必须预定义最大容量；一旦满需整体扩容，单次扩容成本 `O(n)`  
+   - 尽管如此，摊销后 `push()` 仍视作 `O(1)`  
+2. **链表栈**  
+   - 无需预定义容量，天然支持动态增长  
+   - 但每个节点存储指针，内存占用稍高
 
 ---
 
@@ -131,15 +191,58 @@ end procedure
 ---
 
 ## 八、括号匹配示例
+题目链接：[20. Valid Parentheses](https://leetcode.cn/problems/valid-parentheses/description/)
+![stack](/images/stack4.png)
+```Pseudo
+函数 isValid（字符串 s）返回 布尔
+    创建空栈 stack          # 用来保存“期望出现的右括号”
 
-- 有效的括号序列需满足所有 `(`、`{`、`[` 都有对应的闭合 `)`、`}`、`]`。  
-- 使用栈可轻松判断括号是否匹配，算法思路为：  
-  - 遇到左括号入栈  
-  - 遇到右括号时，检查栈顶是否匹配，若匹配则弹出，否则不匹配  
-  - 最终栈空则匹配成功，否则失败  
+    对 s 的每个字符 ch 做
+        如果 ch 是左括号                   # ‘(’  ‘{’  ‘[’
+            根据 ch 对应的右括号 r
+            将 r 压入 stack               # 说明我们接下来“期待”遇到 r
+            跳到下一个字符
+        否则                              # ch 是右括号
+            如果 stack 为空               # 没有任何等待配对的右括号
+                返回 假                   # 提前判定失败
+            如果 stack.top() ≠ ch         # 等待的括号类型与 ch 不匹配
+                返回 假
+            弹出 stack.top()              # 成功配对，栈顶出栈
+    循环结束
 
-**正确示例：** `( ) (( )) { ( [ ( ) ] ) }`  
-**错误示例：** `(( ( ) (( )) { ( [ ( ) ] ) }` 或 `) (( )) { ( [ ( ) ] ) }`  
+    如果 stack 为空                       # 没有遗留的等待配对项
+        返回 真                           # 全部匹配成功
+    否则
+        返回 假                           # 还有多余的左括号
+结束函数
+
+```
+```java
+class Solution {
+    public boolean isValid(String s) {
+        Deque<Character> deque = new LinkedList<>();
+        char ch;
+        for (int i = 0; i < s.length(); i++) {
+            ch = s.charAt(i);
+            //碰到左括号，就把相应的右括号入栈
+            if (ch == '(') {
+                deque.push(')');
+            }else if (ch == '{') {
+                deque.push('}');
+            }else if (ch == '[') {
+                deque.push(']');
+            } else if (deque.isEmpty() || deque.peek() != ch) {
+                return false;
+            }else {//如果是右括号判断是否和栈顶元素匹配
+                deque.pop();
+            }
+        }
+        //遍历结束，如果栈为空，则括号全部匹配
+        return deque.isEmpty();
+    }
+}
+
+```
 
 ---
 
