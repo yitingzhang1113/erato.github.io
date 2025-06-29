@@ -15,25 +15,9 @@
 
 ## 本地运行
 
-1. 安装 Bundler（如果未安装）：
-
-gem install bundler
-
-markdown
-Copy
-
-2. 安装依赖：
 
 ```shell
-bundle install
-```
-
-
-
-
-3. 启动本地服务器：
-```shell
-bundle exec jekyll serve
+jekyll serve
 ```
 
 4. 打开浏览器访问：
@@ -84,12 +68,6 @@ yaml
 Copy
 
 ---
-
-## 联系我
-
-- GitHub：https://github.com/yourusername  
-- 博客：https://yourusername.github.io
-
 ---
 
 **Erato**

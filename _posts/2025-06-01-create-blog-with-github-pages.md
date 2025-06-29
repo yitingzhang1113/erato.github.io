@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "2025年暑期学习计划 (6.10 – 8.10)"
+title: "2025年暑期学习计划 (重生版)"
 date: 2025-06-01
 tags: [学习计划]
 comments: true
@@ -8,107 +8,84 @@ author: Erato
 permalink: /create-blog-with-github-pages/2025-06-01/
 ---
 ## 一、数据结构（Data Structures）
+代码随想录讲义[学习计划](https://docs.qq.com/doc/DUERPeG1yRHBCUkJ5)
+# 代码随想录算法训练营 × CS 61B (精简对标) 学习表  
+起始 **2025-06-26**   →   主线结束 **2025-08-09**，随后 **两周 Hot 100 Blitz**  
+> 仅保留 **与当日算法主题直接相关** 的 CS 61B Lecture／Lab／Project 或 Princeton Algorithms(Coursera) 参考，其余留空。  
 
-> **目标**：补足 5.12–6.6 的核心内容并在 8.10 前完成后续学习与刷题。  
-> **方法**：结合 Lecture Modules、教材章节、Homework & Problem Set，以及 LeetCode 刷题。
----
-
-## 紧急补课计划：5.12–6.13 全部内容（6.10–6.15 完成）
-
-> **策略**：从 Week 5（最新）往前补，到 Week 1；每天混合多个主题，高效率覆盖所有内容。
-
-| 日期       | 学习内容                                                                                                                                                |
-| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **6/10 周二** | **Week 5 → Week 4**<br/>•  Module 4：Binary Trees，Module 6：BST Operations + Binary Heaps + SkipLists=<br/>• AVL properties + Single rotations<br/>• Module 7：Chapter 9.1–9.2<br/>• Maps & HashTables |
-| **6/11 周三** | **Week 4 → Week 3**<br/>• Module 7：Chapter 9.3–9.4, 10.1–10.2<br/>• HashMaps & External Chaining<br/>• Module 6：Chapter 8 & Chapter 11.1<br/>• BST Traversals |
-| **6/12 周四** | **Week 3 → Week 2**<br/>• Module 8：Chapter 10.4 & Chapter 11.3<br/>• Module 4：Stacks (复习 & 练习)<br/>• Module 3：Queues & Deques (Chapter 8 & 11.1) |
-| **6/13 周五** | **Week 2 → Week 1**<br/>•<br/>• Module 2：Chapter 1–2 + Syllabus & Reality Check<br/>• ArrayLists (Java 实现练习)                |
-| **6/14 周六** | **Week 1**<br/>• Module 2/3：Chapter 3.1–3.4 + Chapter 6.1–6.2<br/>• LinkedLists（单向/循环/双向）<br/>• Recursion（理论 & 代码实践）                        |
-| **6/15 周日** | **Week 1 余下 + 总复习**<br/>• Iterators & Iterable<br/>• 整理笔记 & 错题本<br/>• LeetCode 混合挑战 2–3 道（ArrayList、LinkedList、Recursion、Tree 等）         |
-
-### Week 6：2–4 树 (Module 9, Chapter 12.1)  
-> **目标**：掌握 2–4 树的节点结构、插入时的 Overflow 分裂和删除时的 Underflow 合并  
-
-| 日期       | 内容                                                                                 | 任务                                                                                           |
-| ---------- | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------- |
-| **6/16 周一** | • 阅读 Chapter 12.1 前半：2–4 树节点结构 & Properties<br/>• 理解“满节点”与“最少键数”       | - 手绘 2–4 树节点布局<br/>- 在纸上演示 3 键节点插入后 Overflow 分裂                              |
-| **6/17 周二** | • 插入算法 & Overflow 机制<br/>• 分裂后如何把中间键上移                                   | - 用 Java/C++ 实现 `insert(key)` 基本框架<br/>- 编写 3–4 个小例子验证分裂逻辑                      |
-| **6/18 周三** | • 删除算法 & Underflow 机制<br/>• 从兄弟节点借键 vs 合并节点                              | - 手写 delete(key) 的借键与合并流程<br/>- 在纸上画出 Underflow 合并前后节点变化                   |
-| **6/19 周四** | **学校假日**                                                                         | - 复习周一至周三笔记<br/>- 在 LeetCode 上找 “B-Tree Insert” 风格题，写出思路（不用提交）           |
-| **6/20 周五** | • Underflow 代码实现<br/>• 完整插入+删除流程整合                                         | - 在代码中补全合并逻辑<br/>- LeetCode “Design B+ Tree” 或 “Implement B-tree” 模拟练习             |
-
----
-
-### Week 7：排序算法 (Module 10 & 11, Chapter 12.1 & 12.3)  
-> **目标**：熟练掌握迭代排序与分治排序的原理、实现与优化  
-
-| 日期       | 内容                                                                                 | 任务                                                                                           |
-| ---------- | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------- |
-| **6/23 周一** | • Selection Sort, Insertion Sort, Bubble Sort 原理<br/>• 时间 & 空间复杂度分析           | - 手写三种算法伪代码<br/>- LeetCode “Easy” 级别排序题（如 Sort Colors）                          |
-| **6/24 周二** | • Merge Sort<br/>• 分治思想：分、治、合                                                  | - 实现 `mergeSort(arr)`<br/>- 在随机数组上测试，并对比 Java 内置 `Arrays.sort()`                 |
-| **6/25 周三** | • Quick Sort<br/>• 选取 pivot 策略 & 分区算法                                          | - 实现三种 pivot 选取（首/中/随机）<br/>- 分析最坏、平均、最好情况时间复杂度                     |
-| **6/26 周四** | • Heap Sort<br/>• Heapify & 堆排序流程                                                  | - 用数组模拟最大堆<br/>- 实现 `heapSort(arr)` 并测试                                           |
-| **6/27 周五** | • 综合练习：多算法对比                                                                 | - LeetCode “Merge Intervals” / “Sort Characters By Frequency”<br/>- 总结每种算法优缺点           |
-
----
-
-### Week 8：模式匹配 (Module 12, Chapter 12.2 & 12.5, +Paper)  
-> **目标**：掌握 Boyer–Moore 和 KMP 算法  
-
-| 日期       | 内容                                                                                 | 任务                                                                                           |
-| ---------- | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------- |
-| **6/30 周一** | • 模式匹配基础：暴力 vs 优化策略<br/>• 了解坏字符 & 好后缀规则                        | - 手动模拟一次 BM 坏字符移动<br/>- 列出好后缀表构造步骤                                         |
-| **7/1 周二**  | • Boyer–Moore 详细流程<br/>• 坏字符表 & 好后缀表构建                                 | - 实现 `boyerMoore(text, pat)`<br/>- 在几个样例串上测试并打印每次移动位置                           |
-| **7/2 周三**  | • KMP 算法：前缀函数 (π) 计算<br/>• 利用 π 表优化匹配                                  | - 实现 `computePrefix(pat)`<br/>- 实现 `kmpSearch(text, pat)`                                    |
-| **7/3 周四**  | **学校假日**                                                                         | - 复习 BM & KMP 代码<br/>- LeetCode “Implement strStr()” 思路化练习                             |
-| **7/4 周五**  | • 模式匹配综合练习                                                                   | - LeetCode “Minimum Window Substring”<br/>- LeetCode “Wildcard Matching”                         |
+| Day | 日期 | 代码随想录算法任务 | 对应 CS 61B / Coursera 观看 & Coding |
+|----|------|------------------|--------------------------------------|
+| 1  | 06/26 Thu | 数组 Part 01 | CS61B Lec 5 Arrays (DLLists/Arrays) |
+| 2  | 06/27 Fri | 数组 Part 02 | 继续 Lec 5 & Lab 1 Git / Setup |
+| 3  | 06/28 Sat | 链表 Part 01 | CS61B Lec 3 IntLists / Recursion |
+| 4  | 06/29 Sun | 链表 Part 02 | CS61B Lec 4 SLLists ＋ 启动 Proj 1A LinkedListDeque |
+| 6  | 07/01 Tue | 哈希表 Part 01 | CS61B Lec 19 Hashing I |
+| 7  | 07/02 Wed | 哈希表 Part 02 | CS61B Lec 20 Hashing II ＋ Lab 7 HashMaps |
+| 8  | 07/03 Thu | 字符串 Part 01 | Princeton Alg Pt 2 Wk 4 String Sort/Substring Search |
+| 9  | 07/04 Fri | 字符串 Part 02 | 继续 Substring Search (KMP / R-K) |
+| 10 | 07/05 Sat | 栈·队列 Part 01 | CS61B Lec 10 Iterators & Deque ＋ Proj 1B ArrayDeque |
+| 11 | 07/06 Sun | 栈·队列 Part 02 | 完成 Proj 1B |
+| 13 | 07/08 Tue | 二叉树 Part 01 | CS61B Lec 16 BST (Set/Map) |
+| 14 | 07/09 Wed | 二叉树 Part 02 | CS61B Lec 17 2-3-4 / B-Trees |
+| 15 | 07/10 Thu | 二叉树 Part 03 | CS61B Lec 18 Red-Black Trees |
+| 16 | 07/11 Fri | 二叉树 Part 04 | **Lab 6 BSTMap** (插入/遍历/删除) |
+| 17 | 07/12 Sat | 二叉树 Part 05 | CS61B Lec 22 Tree Traversals |
+| 18 | 07/13 Sun | 二叉树 Part 06 | CS61B Lec 21 Heaps / Priority Queue |
+| 20 | 07/15 Tue | 二叉树 Part 07 | 完善 Lab 6 ＋ 单元测试 |
+| 21 | 07/16 Wed | 二叉树 Part 08 | LeetCode 综合练习（BST + 堆） |
+| 22 | 07/17 Thu | 回溯 Part 01 | CS61B Lec 3 Recursion 复习 |
+| 23 | 07/18 Fri | 回溯 Part 02 | 实战：子集 / 排列 |
+| 24 | 07/19 Sat | 回溯 Part 03 | 实战：数独 Solver |
+| 25 | 07/20 Sun | 回溯 Part 04 | 错题复盘 |
+| 27 | 07/22 Tue | 贪心 Part 01 | CS61B Lec 25 MST（Kruskal/Prim） |
+| 28 | 07/23 Wed | 贪心 Part 02 | Princeton Alg Pt 2 Wk 1 MST 补充 |
+| 29 | 07/24 Thu | 贪心 Part 03 | 实战：区间调度 |
+| 30 | 07/25 Fri | 贪心 Part 04 | 实战：Jump Game |
+| 31 | 07/26 Sat | 贪心 Part 05 | 贪心错题整理 |
+| 32 | 07/27 Sun | DP Part 01 | CS61B Lec 24 Shortest Paths (Dijkstra ≈ DP) |
+| 34 | 07/29 Tue | DP Part 02 | CS61B Lec 26 DAG Topo DP |
+| 35 | 07/30 Wed | DP Part 03 | CS61B Lec 37 Algorithm Design Practice |
+| 36 | 07/31 Thu | DP Part 04 | 实战：0/1 背包 |
+| 37 | 08/01 Fri | DP Part 05 | 实战：LIS / LCS |
+| 38 | 08/02 Sat | DP Part 06 | 实战：区间 DP |
+| 39 | 08/03 Sun | DP Part 07 | 实战：树形 DP |
+| 41 | 08/05 Tue | DP Part 08 | 状压 DP（TSP） |
+| 42 | 08/06 Wed | DP Part 09 | 记忆化 Search → DP |
+| 43 | 08/07 Thu | DP Part 10 | Hot 100 DP 高频 |
+| 44 | 08/08 Fri | DP Part 11 | 小项目：Java LRU Cache |
+| 45 | 08/09 Sat | DP Part 12 | 课程总结 & GitHub 更新 |
 
 ---
 
-### Week 9：字符串 & 图论 (Module 13 & 14, Chapter 14.1–14.3 + Paper)  
-> **目标**：掌握 Rabin–Karp 哈希 & 基本图算法  
+## Hot 100 Blitz （08-10 → 08-23）  
+目标：**14 天刷完剩余 Hot 100 题**（约 8 题／日）
 
-| 日期       | 内容                                                                                 | 任务                                                                                           |
-| ---------- | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------- |
-| **7/7 周一**  | • Galil Rule 概述<br/>• Rabin–Karp 滚动哈希思想                                       | - 实现 `rabinKarp(text, pat)`<br/>- 在长文本中测试 hash 冲突                                    |
-| **7/8 周二**  | • Rabin–Karp 练习<br/>• 分析哈希冲突处理                                             | - LeetCode “Implement strStr()” 哈希解法<br/>- 总结 vs KMP 优劣                                |
-| **7/9 周三**  | • 图的存储 (邻接表/矩阵)<br/>• BFS & DFS 理论与代码                                    | - 实现 `bfs(start)` & `dfs(start)`<br/>- 在小图示例上跑通                                    |
-| **7/10 周四** | • 图遍历练习                                                                         | - LeetCode “Number of Islands”<br/>- LeetCode “Course Schedule”                                 |
-| **7/11 周五** | • Dijkstra’s 最短路径算法<br/>• 优先队列实现                                         | - 实现 `dijkstra(src)`<br/>- LeetCode “Network Delay Time” 或 “Path With Minimum Effort”         |
+| 日次 | 日期 | 任务 |
+|------|------|------|
+| B1 | 08/10 Sun | Hot 100 #1-8 |
+| B2 | 08/11 Mon | Hot 100 #9-16 |
+| B3 | 08/12 Tue | Hot 100 #17-24 |
+| B4 | 08/13 Wed | Hot 100 #25-32 |
+| B5 | 08/14 Thu | Hot 100 #33-40 |
+| B6 | 08/15 Fri | Hot 100 #41-48 |
+| B7 | 08/16 Sat | Hot 100 #49-56 |
+| B8 | 08/17 Sun | Hot 100 #57-64 |
+| B9 | 08/18 Mon | Hot 100 #65-72 |
+| B10 | 08/19 Tue | Hot 100 #73-80 |
+| B11 | 08/20 Wed | Hot 100 #81-88 |
+| B12 | 08/21 Thu | Hot 100 #89-96 |
+| B13 | 08/22 Fri | Hot 100 #97-100 ＋ 错题复盘 |
+| B14 | 08/23 Sat | 机考模拟 + 总复习 |
 
----
-
-### Week 10：MST & LCS (Module 15 & 16)  
-> **目标**：掌握最小生成树算法 & 最长公共子序列  
-
-| 日期         | 内容                                                                               | 任务                                                                                         |
-| ------------ | ---------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| **7/14 周一**  | • MST 概念 & Prim’s Algorithm<br/>• 贪心策略                                       | - 实现 `primMST()`<br/>- 在加权无向图示例上测试                                            |
-| **7/15 周二**  | • Kruskal’s Algorithm<br/>• 并查集 (Union-Find)                                   | - 实现并测试 `kruskalMST()`<br/>- 完善并查集路径压缩                                        |
-| **7/16 周三**  | • LCS 动态规划方程 & 状态转移                                                     | - 实现 `longestCommonSubsequence(s1, s2)`<br/>- 打印 DP 表                                      |
-| **7/17 周四**  | • 综合练习                                                                         | - LeetCode “Minimum Spanning Tree”<br/>- LeetCode “Edit Distance”                            |
-| **7/18 周五**  | • 周总结 & 弱点复盘                                                                 | - 整理错题本<br/>- 制作思维导图<br/>- 制定下一阶段刷题计划                                      |
-
----
-
-> **每日练习建议**：  
-> - **Lecture/Reading**：上午 1–2h 专注阅读与笔记  
-> - **Coding**：下午 1–2h 实现 & 测试  
-> - **LeetCode**：晚间 30–60min 刷 1–2 题，务必字节级优化  
-> - **复盘**：当天结束前 15min 回顾，记录疑问与收获
 
 ## 二、Full Stack 开发
+
 
 > **目标**：掌握前端 → React → 后端整合 → 完成全栈项目  
 > **课程链接**：  
 > - **Udemy—Complete Web Development Bootcamp**：  
->   https://www.udemy.com/course/the-complete-web-development-bootcamp/learn/lecture/12638830#overview  
+>   （https://www.udemy.com/course/the-complete-web-development-bootcamp/learn/lecture/12638830#overview）  
 
-1. **6.10 – 6.20**：HTML/CSS、JavaScript 基础与项目  
-2. **6.21 – 7.5**：React 组件、状态管理、Router  
-3. **7.6 – 7.20**：Node.js + Express + 数据库；RESTful API  
-4. **7.21 – 8.5**：全栈项目（React + 后端 + 部署）  
-5. **8.6 – 8.10**：项目优化、README & 部署文档、Demo 准备
 
 ---
 
@@ -117,17 +94,47 @@ permalink: /create-blog-with-github-pages/2025-06-01/
 > **目标**：理解 RAG 原理 → 搭建检索 → 集成生成 → 完成 RAG Demo  
 > **课程链接**：  
 > - **Udemy—The AI Engineer Course**：  
->   https://www.udemy.com/course/the-ai-engineer-course-complete-ai-engineer-bootcamp/  
+>  （https://www.udemy.com/course/the-ai-engineer-course-complete-ai-engineer-bootcamp/） 
 
-1. **6.10 – 6.20**：RAG 概念、Tokenization、Embeddings  
-2. **6.21 – 7.5**：检索模块（Elasticsearch/FAISS）  
-3. **7.6 – 7.20**：生成模型集成（Hugging Face / OpenAI）  
-4. **7.21 – 8.5**：端到端 RAG 应用（FastAPI + React）  
-5. **8.6 – 8.10**：性能调优、项目报告 & Demo 准备
 
-## 我准备的project
+## 我准备的project和intern
+---
 
-## 1. 个人网站的搭建
+### 1️⃣ Paraply ✈️ **Next.js ➜ FastAPI 全栈迁移 & Agentic Chat**  
+
+| 目标 | 关键产出 | 可写简历量化语句 |
+|------|---------|-----------------|
+| **API 全量迁移** | • 40+ Next.js `/api/*` 路由→FastAPI `v1` 版 <br>• 保留 Swagger/OpenAPI 文档 | “独立迁移 **40+ REST 端点** 至 FastAPI，保持零功能回归，接口响应延迟 ↓ 35%” |
+| **前后端解耦 + DevOps** | • `docker-compose` 一键启动 (Uvicorn + Next.js)<br>• GitHub Actions CI / pytest | “搭建 **CI/CD**，PR 内自动跑 pytest + lint，实现 <200 s 构建管线” |
+| **Agentic Framework** | • 重构聊天 Agents (工具调用 + RAG)<br>• 多轮 QA 成功率 > 90% (10 题基准) | “设计可插拔 **Agent Framework**，问答正确率 **+18 pp**” |
+| **UI/设计减冗** | • Chakra UI → 原生 Tailwind/Headless UI<br>• 首屏包体 ↓ 42 KB | “精简前端依赖，首屏加载时间 **2.1 s → 1.3 s**” |
+
+---
+
+### 2️⃣ MECL-Web 🧬 **BioTech 研究平台 Backend（TypeScript + Express）**  
+
+| 目标 | 关键产出 | 可写简历量化语句 |
+|------|---------|-----------------|
+| **模块化 API 架构** | • `src/api/*` 路由分层（handlers / routes）<br>• Mongoose DAO + DTO 校验 | “主导 **14 个 REST 资源** 模块化改造，后续功能迭代效率 **+30%**” |
+| **RBAC 中间件** | • 通用 `specific()` & `generic()` 权限校验<br>• 继承式角色树 (Admin > Researcher > Student) | “实现 **RBAC**（5 级权限），将潜在越权缺陷数从 6 处降至 0” |
+| **单元测试 / TDD** | • Jest + Supertest，90% + 覆盖率<br>• Mock Mongo 自动化 CI | “撰写 **120+ Jest cases**，服务端代码覆盖率 **91%**” |
+| **Docker & Cloud Ready** | • 多阶段 Dockerfile（Node → Slim）<br>• `.env.template` → Secrets 管理 | “交付可容器化镜像（250 MB），在 GCP Cloud Run 首次启动 **<5 秒**” |
+
+---
+
+### 3️⃣ InterGen Innovators 🤝 **AI Tooling & Hackathon (7/10 – 8/14)**  
+
+| 阶段 | 关键产出 | 可写简历量化语句 |
+|------|---------|-----------------|
+| **AI Tool 链学习** | • 熟练 Gemini / Claude / Copilot / MidJourney <br>• 编写 20+ Prompt 模板 | “策划 **20+ Prompt 工程模板**（文本/图像），被团队沿用作标准库” |
+| **Custom GPT & Image Gen** | • 发布 1 个公开 GPT（主题 X）<br>• MidJourney workflow 文档化 | “构建并上线 **定制 GPT**，7 天获取 **300+ 会话**” |
+| **Hackathon 快速迭代** | • 3 人跨代团队交付 AI 原型<br>• Demo Day『Best Use of AI』Top 3 | “在 6 小时 Hackathon 中带队开发 XR 导览原型，获 **Top 3**” |
+| **职业输出** | • 项目 GitHub / Demo 视频 / Pitch Deck<br>• 2 家 AI 初创实习面试邀约 | “凭 Demo 获 **2 家** AI startup 面试邀请” |
+
+---
+
+
+## 1. 个人网站的搭建--等有时间
 
 ### 1.1 原型设计  
 - 基于 [avatar-blue-dreams-website](https://github.com/yitingzhang1113/avatar-blue-dreams-website) 完成前端原型  
@@ -175,16 +182,6 @@ permalink: /create-blog-with-github-pages/2025-06-01/
 - **CI/CD**：GitHub Actions 自动化构建 & 部署  
 - **域名**：购买个人域名，配置 HTTPS  
 
-### 1.8 时间规划  
-
-| 阶段       | 时间范围   | 主要任务                           |
-| ---------- | ---------- | ---------------------------------- |
-| 原型优化   | Week 1     | 完善前端交互、响应式布局            |
-| 后端搭建   | Week 2     | 搭建基础 API、配置数据库            |
-| AI 数字人  | Week 3–4   | 集成模型、训练语音 & 表情动画       |
-| 知识图谱   | Week 5     | 构建 Neo4j 图谱、测试检索逻辑       |
-| 多模态交互 | Week 6     | 语音/文本接口调试及前端集成         |
-| 部署上线   | Week 7     | CI/CD 配置、域名绑定、正式发布      |
 
 
 ## 2.准备一个java后端的有我不太会的知识的project
