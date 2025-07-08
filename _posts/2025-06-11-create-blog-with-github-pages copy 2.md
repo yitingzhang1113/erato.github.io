@@ -2,7 +2,7 @@
 layout: post
 title: "birnary tree（二叉树）学习笔记-修改与构造"
 date: 2025-06-09
-tags: [二叉树]
+tags: [data structure, 二叉树]
 comments: true
 author: Erato
 permalink: /create-blog-with-github-pages/2025-06-11/

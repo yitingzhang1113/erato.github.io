@@ -2,7 +2,7 @@
 layout: post
 title: "Heap（堆）"
 date: 2025-06-12
-tags: [堆]
+tags: [data structure,堆]
 comments: true
 author: Erato
 mathjax: true

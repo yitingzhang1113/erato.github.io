@@ -2,7 +2,7 @@
 layout: post
 title: "数据结构之 Array(数组）详解"
 date: 2025-06-04
-tags: [数组]
+tags: [data structure, 数组]
 comments: true
 author: Erato
 permalink: /create-blog-with-github-pages/2025-06-04/

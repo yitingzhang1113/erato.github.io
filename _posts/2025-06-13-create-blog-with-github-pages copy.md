@@ -390,3 +390,142 @@ for (T x : collection) {
 3. Indexing into an array — 访问数组元素  
 4. Calling a method — 调用方法  
 5. Returning from a method — 从方法返回  
+# Iterators（迭代器）
+
+## 1. 迭代器的背景
+
+- 数据结构种类繁多：数组、数组列表、链表、各种树、哈希表等。
+- 一个常见需求是遍历数据结构中的所有元素。
+- 但不同数据结构遍历方式不同，通常需要为每种结构写不同代码。
+- 迭代器抽象了这一过程，提供统一接口遍历各种数据结构。
+
+---
+
+## 2. 迭代器的定义和作用
+
+- 迭代器通常是一个特殊的类或对象，用于遍历数据结构。
+- 它封装了具体的数据访问细节，提供通用的操作方法。
+- 迭代器常见方法包括：
+  - 获取当前元素
+  - 移动到下一个元素
+  - （可选）移动到上一个元素
+
+---
+
+## 3. Java 中的迭代器接口
+
+- Java `java.util.Iterator` 接口主要包含三个方法：
+  - `hasNext()`：判断是否还有下一个元素。
+  - `next()`：返回下一个元素。
+  - `remove()`：移除最近返回的元素（可选实现）。
+- `remove()` 方法不是强制实现，Java 8 起默认抛出 `UnsupportedOperationException`。
+
+---
+
+## 4. 迭代器的实现方式
+
+- 数据结构一般会内部实现迭代器，常见为内部类或私有类。
+- 例如，Java 中链表会实现一个内部类，实现 `Iterator` 接口来遍历链表元素。
+- 数据结构类自身实现 `Iterable` 接口，提供 `iterator()` 方法返回对应迭代器实例。
+
+---
+
+## 5. 迭代器的使用
+
+- 用户通过调用数据结构的 `iterator()` 方法获得迭代器。
+- 然后通过循环调用 `hasNext()` 和 `next()` 遍历所有元素。
+- 注意：数据结构在遍历过程中若发生修改，可能导致迭代器失效并抛出异常（如 `ConcurrentModificationException`）。
+
+---
+
+## 6. Java 迭代器示例代码（单链表）
+
+```java
+public class LinkedList<T> implements Iterable<T> {
+    private Node<T> head;
+
+    // 省略其他方法
+
+    @Override
+    public Iterator<T> iterator() {
+        return new LinkedListIterator<>(head);
+    }
+
+    private static class LinkedListIterator<T> implements Iterator<T> {
+        private Node<T> currentNode;
+
+        public LinkedListIterator(Node<T> startNode) {
+            this.currentNode = startNode;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return currentNode != null;
+        }
+
+        @Override
+        public T next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            T data = currentNode.data;
+            currentNode = currentNode.next;
+            return data;
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
+    }
+
+    private static class Node<T> {
+        T data;
+        Node<T> next;
+        Node(T data) { this.data = data; }
+    }
+}
+```
+---
+
+## 7. 使用迭代器遍历示例
+
+LinkedList<Integer> linkedList = new LinkedList<>();
+// 假设链表已添加元素
+
+Iterator<Integer> it = linkedList.iterator();
+while (it.hasNext()) {
+    Integer data = it.next();
+    System.out.println("Data: " + data);
+}
+---
+
+## 8. Java 的增强 for 循环（for-each）
+Java 支持用增强 for 循环遍历实现了 Iterable 接口的数据结构。
+
+语法更简洁，减少出错概率。
+
+```
+for (Integer data : linkedList) {
+    System.out.println("Data: " + data);
+}
+```
+---
+
+## 9. 迭代器的性能
+迭代器通常具有与其他访问方法相同或更优的时间复杂度。
+
+例如对链表，迭代器的遍历为 O(n)，而调用 get() 访问每个元素为 O(n²)。
+
+---
+
+## 10. 多种迭代器与应用
+数据结构可实现多种迭代器，例如：
+
+列表的正向迭代器与反向迭代器。
+
+树的前序、中序、后序、层序迭代器等（稍后学习树结构时详解）。
+
+但一个数据结构的 iterator() 方法只能返回一种迭代器，供 for-each 循环使用。
+
+迭代器为不同数据结构提供了统一的遍历接口，简化代码，提升可维护性，是现代编程语言重要的设计模式之一。

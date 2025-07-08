@@ -2,7 +2,7 @@
 layout: post
 title: "数据结构之 Stack（堆栈）与队列（Queue）详解"
 date: 2025-06-02
-tags: [Stack（堆栈）与队列（Queue）]
+tags: [data structure, Stack（堆栈）与队列（Queue）]
 comments: true
 author: Erato
 permalink: /create-blog-with-github-pages/2025-06-02/
@@ -190,59 +190,7 @@ end procedure
 
 ---
 
-## 八、括号匹配示例
-题目链接：[20. Valid Parentheses](https://leetcode.cn/problems/valid-parentheses/description/)
-![stack](/images/stack4.png)
-```Pseudo
-函数 isValid（字符串 s）返回 布尔
-    创建空栈 stack          # 用来保存“期望出现的右括号”
 
-    对 s 的每个字符 ch 做
-        如果 ch 是左括号                   # ‘(’  ‘{’  ‘[’
-            根据 ch 对应的右括号 r
-            将 r 压入 stack               # 说明我们接下来“期待”遇到 r
-            跳到下一个字符
-        否则                              # ch 是右括号
-            如果 stack 为空               # 没有任何等待配对的右括号
-                返回 假                   # 提前判定失败
-            如果 stack.top() ≠ ch         # 等待的括号类型与 ch 不匹配
-                返回 假
-            弹出 stack.top()              # 成功配对，栈顶出栈
-    循环结束
-
-    如果 stack 为空                       # 没有遗留的等待配对项
-        返回 真                           # 全部匹配成功
-    否则
-        返回 假                           # 还有多余的左括号
-结束函数
-
-```
-```java
-class Solution {
-    public boolean isValid(String s) {
-        Deque<Character> deque = new LinkedList<>();
-        char ch;
-        for (int i = 0; i < s.length(); i++) {
-            ch = s.charAt(i);
-            //碰到左括号，就把相应的右括号入栈
-            if (ch == '(') {
-                deque.push(')');
-            }else if (ch == '{') {
-                deque.push('}');
-            }else if (ch == '[') {
-                deque.push(']');
-            } else if (deque.isEmpty() || deque.peek() != ch) {
-                return false;
-            }else {//如果是右括号判断是否和栈顶元素匹配
-                deque.pop();
-            }
-        }
-        //遍历结束，如果栈为空，则括号全部匹配
-        return deque.isEmpty();
-    }
-}
-
-```
 
 ---
 
@@ -379,6 +327,60 @@ process = processes.dequeue()   # 取出队首进程
 对该进程执行工作
 processes.enqueue(process)      # 将进程重新加入队尾
 ```
+
+# Deque
+### 核心实现对比速查表
+
+| 结构 | 典型类 | 底层存储 | 线程安全性 | 是否允许 `null` | 关键 API<br>(常用别名) | 典型场景 | 时间复杂度† |
+|------|--------|----------|------------|---------------|------------------------|-----------|-------------|
+| **Stack (Array)** | `ArrayDeque` <br>（或旧 `Stack/Vector`） | 可扩容环形数组 | `ArrayDeque` ✘ <br>`Stack` ✔︎ (同步) | ✘ | `push(e)` = `addFirst(e)`<br>`pop()` = `removeFirst()` | 单线程 LIFO 栈，空间局部性好 | `O(1)` 均摊 |
+| **Stack (LinkedList)** | `LinkedList` (`Deque`) | 双向链表 | ✘ | ✔︎ | 同上 | 需要频繁插入删除且可能使用 `null` 占位 | `O(1)` |
+| **Queue (Array)** | `ArrayDeque` (无界) <br>`ArrayBlockingQueue` (有界) | 环形数组 | `ArrayDeque` ✘<br>`ArrayBlockingQueue` ✔︎ | ✘ | `offer(e)` / `poll()` / `peek()` | FIFO 队列；环形缓冲/固定容量 | `O(1)` |
+| **Queue (LinkedList)** | `LinkedList` (无界) <br>`LinkedBlockingQueue` (有/无界) | 链式节点 | `LinkedList` ✘<br>`LinkedBlockingQueue` ✔︎ | `LinkedList` ✔︎ | 同上 | 队列大小未知、阻塞生产/消费 | `O(1)` |
+| **Deque (Array)** | `ArrayDeque` | 环形数组 | ✘ | ✘ | `addFirst/Last` <br>`pollFirst/Last` <br>`push/pop` | 双端队列；既可栈又可队列 | `O(1)` |
+| **Deque (LinkedList)** | `LinkedList` ✘<br>`LinkedBlockingDeque` ✔︎<br>`ConcurrentLinkedDeque` ✔︎ | 双向链表 | 视实现而定 | `LinkedList` ✔︎ | 同上 + `removeFirstOccurrence` | 双端 + 需要并发或允许 `null` | `O(1)` |
+
+† 指首尾插入 / 删除平均复杂度；中间插入仅 `LinkedList` 支持，为 `O(n)`。
+
+---
+
+#### 快速选型建议
+
+| 需求 | 建议实现 |
+|------|----------|
+| 单线程栈 | `ArrayDeque` |
+| 并发栈（非阻塞） | `ConcurrentLinkedDeque` |
+| 阻塞栈 | `LinkedBlockingDeque` |
+| 无界 FIFO 队列 | `ArrayDeque` |
+| 有界阻塞队列 | `ArrayBlockingQueue` |
+| 无界阻塞队列 | `LinkedBlockingQueue` |
+| 高性能双端队列 | `ArrayDeque` |
+| 并发双端队列 | `ConcurrentLinkedDeque` / `LinkedBlockingDeque` |
+
+---
+
+#### 方法速记
+
+| 操作 | 抛异常版 | 返回特殊值版 | 备注 |
+|------|---------|-------------|------|
+| 队尾入队 | `addLast` | `offerLast` | `Queue.add/offer` 别名 |
+| 队首入队 | `addFirst` | `offerFirst` | 栈的 `push` |
+| 队首出队 | `removeFirst` | `pollFirst` | 栈的 `pop` |
+| 队尾出队 | `removeLast` | `pollLast` | — |
+| 查看队首 | `getFirst` | `peekFirst` | 栈/队列通用 |
+| 查看队尾 | `getLast` | `peekLast` | — |
+
+---
+
+##### 面向接口编程示例
+
+```java
+Deque<Integer> stack = new ArrayDeque<>();              // 栈
+Queue<Task> tasks = new LinkedBlockingQueue<>();        // FIFO 队列
+Deque<Node> deque = new ConcurrentLinkedDeque<>();      // 并发双端
+```
+[查看](https://www.runoob.com/java/java-data-structures.html)
+
 # LeetCode 例题
 
 代码随想录讲义：[树与队列理论基础](https://programmercarl.com/%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html)
@@ -457,32 +459,224 @@ processes.enqueue(process)      # 将进程重新加入队尾
 - 摊销时间复杂度为 O(1)，实现高效的队列操作。
 
 ---
-
-## 参考伪代码
-
-```pseudo
+java code
+```java
 class MyQueue {
-    stackIn
-    stackOut
 
-    method push(x):
-        stackIn.push(x)
+    Stack<Integer> stackIn;
+    Stack<Integer> stackOut;
 
-    method pop():
-        dumpStackInToOutIfNeeded()
-        return stackOut.pop()
+    /** Initialize your data structure here. */
+    public MyQueue() {
+        stackIn = new Stack<>(); // 负责进栈
+        stackOut = new Stack<>(); // 负责出栈
+    }
+    
+    /** Push element x to the back of queue. */
+    public void push(int x) {
+        stackIn.push(x);
+    }
+    
+    /** Removes the element from in front of queue and returns that element. */
+    public int pop() {    
+        dumpstackIn();
+        return stackOut.pop();
+    }
+    
+    /** Get the front element. */
+    public int peek() {
+        dumpstackIn();
+        return stackOut.peek();
+    }
+    
+    /** Returns whether the queue is empty. */
+    public boolean empty() {
+        return stackIn.isEmpty() && stackOut.isEmpty();
+    }
 
-    method peek():
-        dumpStackInToOutIfNeeded()
-        return stackOut.peek()
-
-    method empty():
-        return stackIn.isEmpty() AND stackOut.isEmpty()
-
-    private method dumpStackInToOutIfNeeded():
-        if stackOut is not empty:
-            return
-        while stackIn is not empty:
-            stackOut.push(stackIn.pop())
+    // 如果stackOut为空，那么将stackIn中的元素全部放到stackOut中
+    private void dumpstackIn(){
+        if (!stackOut.isEmpty()) return; 
+        while (!stackIn.isEmpty()){
+                stackOut.push(stackIn.pop());
+        }
+    }
 }
+```
+// 练习用：两栈模拟队列
+
+```java
+class MyQueue {
+    Deque<Integer> in  = new ArrayDeque<>();   // 可换成 LinkedList
+    Deque<Integer> out = new ArrayDeque<>();
+
+    public void push(int x) { in.push(x); }    // push == addFirst
+
+    private void dump() {                      // 只有 out 空才倒一次
+        if (!out.isEmpty()) return;
+        while (!in.isEmpty())
+            out.push(in.pop());
+    }
+    public int pop()  { dump(); return out.pop(); }
+    public int peek() { dump(); return out.peek(); }
+    public boolean empty() { return in.isEmpty() && out.isEmpty(); }
+}
+```
+
+## 225. 用队列实现栈
+
+```java
+class MyStack {
+    Queue<Integer> queue;
+    
+    public MyStack() {
+        queue = new LinkedList<>();
+    }
+    
+    public void push(int x) {
+        queue.add(x);
+    }
+    
+    public int pop() {
+        rePosition();
+        return queue.poll();
+    }
+    
+    public int top() {
+        rePosition();
+        int result = queue.poll();
+        queue.add(result);
+        return result;
+    }
+    
+    public boolean empty() {
+        return queue.isEmpty();
+    }
+
+    public void rePosition(){
+        int size = queue.size();
+        size--;
+        while(size-->0)
+            queue.add(queue.poll());
+    }
+}
+```
+
+## 20. 有效的括号
+题目链接：[20. Valid Parentheses](https://leetcode.cn/problems/valid-parentheses/description/)
+![stack](/images/stack4.png)
+```Pseudo
+函数 isValid（字符串 s）返回 布尔
+    创建空栈 stack          # 用来保存“期望出现的右括号”
+
+    对 s 的每个字符 ch 做
+        如果 ch 是左括号                   # ‘(’  ‘{’  ‘[’
+            根据 ch 对应的右括号 r
+            将 r 压入 stack               # 说明我们接下来“期待”遇到 r
+            跳到下一个字符
+        否则                              # ch 是右括号
+            如果 stack 为空               # 没有任何等待配对的右括号
+                返回 假                   # 提前判定失败
+            如果 stack.top() ≠ ch         # 等待的括号类型与 ch 不匹配
+                返回 假
+            弹出 stack.top()              # 成功配对，栈顶出栈
+    循环结束
+
+    如果 stack 为空                       # 没有遗留的等待配对项
+        返回 真                           # 全部匹配成功
+    否则
+        返回 假                           # 还有多余的左括号
+结束函数
+
+```
+```java
+class Solution {
+    public boolean isValid(String s) {
+        Deque<Character> deque = new LinkedList<>();
+        char ch;
+        for (int i = 0; i < s.length(); i++) {
+            ch = s.charAt(i);
+            //碰到左括号，就把相应的右括号入栈
+            if (ch == '(') {
+                deque.push(')');
+            }else if (ch == '{') {
+                deque.push('}');
+            }else if (ch == '[') {
+                deque.push(']');
+            } else if (deque.isEmpty() || deque.peek() != ch) {
+                return false;
+            }else {//如果是右括号判断是否和栈顶元素匹配
+                deque.pop();
+            }
+        }
+        //遍历结束，如果栈为空，则括号全部匹配
+        return deque.isEmpty();
+    }
+}
+
+```
+## 1047. 删除字符串中的所有相邻重复项
+题目链接：[1047. Remove All Adjacent Duplicates In String](https://leetcode.cn/problems/remove-all-adjacent-duplicates-in-string/description/)
+
+步骤	关键点	说明
+① 线性扫描	从左到右逐一读字符 ch	只看一次输入，时间复杂度 O(n)
+② 维护栈顶	比较 ch 与栈顶元素 top	- 相同 → 弹出 top，两字符配对“抵消”
+- 不同/栈空 → 把 ch 压栈
+③ 结束后再“反转”	栈顶元素先出	因为我们是后进先出，需要再反转一次或从后向前写入 StringBuilder
+④ 返回结果	栈剩下的即为最终字符串	空间复杂度最坏 O(n)（全部无可抵消时）
+
+为什么不用递归？
+直观的“消消乐”想法是递归：每次找到一段相邻重复就删掉再递归处理剩余串。
+
+但 最坏深度 = 字符串长度，一旦长度很大就会 StackOverflow。
+
+
+
+
+
+
+显式栈（ArrayDeque、char[] 等）把“调用栈”搬到堆内存，大小可控，且不会触发 JVM 的栈深度限制。
+
+为什么用 ArrayDeque 而不是 LinkedList 或 Stack？
+数据结构	push/pop 代价	内存占用	备注
+ArrayDeque	摆头/尾 O(1)，数组局部性好	只存元素本身，无额外 Node 对象	JDK 推荐的栈/队列实现，不能放 null
+LinkedList	O(1)，但每个节点多 2 条指针	Node 对象多，访存分散，缓存命中率低	允许 null
+Stack（继承自 Vector）	同步导致慢，过时	—	已被官方文档建议替换
+
+JDK 源码中的 ArrayDeque 用一个环形数组保存元素，head/tail 两个索引只做 ++/-- 并按位与 mask（长度-1）取模；扩容时整体复制到 2× 容量的新数组。
+这样 push/pop 真正只改一个指针，完全没有 “移动一大片” 的成本。
+```java
+class Solution {
+    public String removeDuplicates(String S) {
+        //ArrayDeque会比LinkedList在除了删除元素这一点外会快一点
+        //参考：https://stackoverflow.com/questions/6163166/why-is-arraydeque-better-than-linkedlist
+        ArrayDeque<Character> deque = new ArrayDeque<>();
+        char ch;
+        for (int i = 0; i < S.length(); i++) {
+            ch = S.charAt(i);
+            if (deque.isEmpty() || deque.peek() != ch) {
+                deque.push(ch);
+            } else {
+                deque.pop();
+            }
+        }
+        String str = "";
+        //剩余的元素即为不重复的元素
+        while (!deque.isEmpty()) {
+            str = deque.pop() + str;
+        }
+        return str;
+    }
+}
+```
+时间复杂度：O(n)（每字符最多进栈一次、出栈一次）
+
+空间复杂度：最坏 O(n)（完全没有可消去对）
+
+实测性能：对长字符串比递归或频繁 String 拼接快得多；在 JVM 内存充裕场景下 ArrayDeque 又比 LinkedList 快 1.5～3 倍。
+
+如果还要更快 / 更省内存
+用 char[] stack = new char[s.length()] 自己维护栈指针 top，省掉装箱与边界检查，可再提速一截。
+
+若要求多线程安全，再在外层加锁或用 ThreadLocal，而不要用过时的 Stack 类。
 
